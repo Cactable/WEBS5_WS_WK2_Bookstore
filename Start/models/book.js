@@ -3,13 +3,15 @@ var mongoose = require('mongoose');
 console.log('Initializing books schema');
 
 var bookSchema = new mongoose.Schema({
-    /*
-    TODO: 2 - Schema books vullen
-    - Title: Verplicht, String
-    - PublishDate: Verplicht, Date, voor vandaag
-    - Category: Verplicht, String
-    - Chapters: Array van JSNON { title, numberOfPages }
-    */
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    birthDate: { type: Date, required: true },
+    country: { type: String, default: 'NL' },
+    ranking: { type: Number, unique: true, min: 1 },
+    books: [{ type: String, ref: 'Book' }]
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
 /*
